@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { CustomerService } from '../customer.service';
 
 @Component({
   selector: 'app-customer-list',
-  templateUrl: './сustomer-list.component.html',
+  templateUrl: './customer-list.component.html',
+  standalone: true,
+  imports: [CommonModule, HttpClientModule],
 //styleUrls: ['./customer-list.component.css'],
 })
 export class CustomerListComponent implements OnInit {
-  customers: any[] = [];
+  
+  constructor(private http:HttpClient) { }
 
-  constructor(private customerService: CustomerService) { }
+  obj: any;
 
   ngOnInit(): void {
-    console.log('CustomerListComponent initialized');
-    this.customerService.getCustomers().subscribe(data => {
-      console.log('Data received:', data);
-      this.customers = data;
-    }, error => {
-      console.error('Error fetching customers:', error);
-    });
-  }
+    this.obj = this.http.get("http://localhost:8000/api/customers/").subscribe(
+      data => this.obj = data
+    )
+    }
 }
