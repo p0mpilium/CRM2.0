@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerService } from './customer.service';
 
+console.log('HttpClientModule:', HttpClientModule);
+
 @NgModule({
   declarations: [
     AppComponent,
